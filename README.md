@@ -131,6 +131,15 @@ Este proyecto utiliza un pipeline de integración continua con dos ramas especí
 
 Cada rama se encarga de generar imágenes optimizadas para su respectiva arquitectura, asegurando compatibilidad en distintos entornos de ejecución.
 
+## Ejecutar Tests
+
+- Instalar dependencias
+    - go mod download
+- Generar mocks
+    - go generate ./...
+- Correr tests
+    - go test -v ./tests/...
+
 ## 👥 Contribución
 
 Para contribuir a este proyecto:

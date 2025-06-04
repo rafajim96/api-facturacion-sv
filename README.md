@@ -63,13 +63,13 @@ cd dte-microservice
 
 3. Iniciar los servicios:
 ```bash
-docker-compose up -d
+docker-compose up
 ```
 
 ### Para desarrollo
 
 ```bash
-docker-compose --profile dev up -d
+docker-compose --profile dev up
 ```
 
 ### Configuración
@@ -130,6 +130,15 @@ Este proyecto utiliza un pipeline de integración continua con dos ramas especí
 - **release-arm64**: Compilación y despliegue de la versión para arquitectura `arm64`
 
 Cada rama se encarga de generar imágenes optimizadas para su respectiva arquitectura, asegurando compatibilidad en distintos entornos de ejecución.
+
+## Ejecutar Tests
+
+- Instalar dependencias
+    - go mod download
+- Generar mocks
+    - go generate ./...
+- Correr tests
+    - go test -v ./tests/...
 
 ## 👥 Contribución
 

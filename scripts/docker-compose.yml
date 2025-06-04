@@ -26,7 +26,7 @@ x-app-environment: &app-environment
   # Configuración de la aplicación
   APP_NAME: DTE-Microservice
 
-  APP_LANG: es # Actualmente soporta es y en
+  APP_LANG: en # Actualmente soporta es y en
   DEBUG: true
   FORCE_CONTINGENCY: false # Forzar el uso de contingencia
   RUN_MIGRATION: false
@@ -82,6 +82,7 @@ services:
     restart: unless-stopped
     environment:
       <<: *mysql-environment
+      MYSQL_ROOT_PASSWORD: root_password
       MYSQL_ROOT_HOST: "%"
     ports:
       - "3306:3306"
@@ -106,7 +107,7 @@ services:
 
   # Servicio de Firmador de Hacienda
   signer:
-    image: svfe/svfe-api-firmador:v20230109
+    image: svfe/svfe-api-firmador:v20250306
     container_name: signer-container
     ports:
       - "8113:8113"
@@ -132,6 +133,8 @@ services:
       <<: *app-environment
     networks:
       - dte_network
+    profiles:
+      - dev2
 
   # Servicio para desarrollo (Hot Reload)
   backend-dev:

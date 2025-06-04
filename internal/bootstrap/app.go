@@ -155,17 +155,14 @@ func (app *Application) initDatabaseConfigurations() (*drivers.DbConnection, err
 
 	// 2. Inicializar la conexión a la base de datos
 	dbConnection := drivers.NewDatabaseConnection(driver)
-	if dbConnection.Err != nil {
-		logs.Fatal("Failed to connect to the database", map[string]interface{}{"error": dbConnection.Err.Error()})
-		return nil, dbConnection.Err
-	}
-	logs.Info("Database connection initialized successfully")
 
 	// 3. Abrir la conexión a la base de datos
 	if err := dbConnection.Open(); err != nil {
-		logs.Fatal("Failed to open database connection", map[string]interface{}{"error": err.Error()})
+		logs.Error("Failed to open database connection after retries", map[string]interface{}{"error": err.Error()})
 		return nil, err
 	}
+
+	logs.Info("Database connection initialized successfully")
 
 	// 4. Iniciar migraciones solo si así está definido en la configuración
 	if config.Server.RunMigration {

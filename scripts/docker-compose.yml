@@ -107,7 +107,7 @@ services:
 
   # Servicio de Firmador de Hacienda
   signer:
-    image: svfe/svfe-api-firmador:v20230109
+    image: svfe/svfe-api-firmador:v20250306
     container_name: signer-container
     ports:
       - "8113:8113"

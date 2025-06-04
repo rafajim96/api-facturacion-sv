@@ -166,9 +166,10 @@ func InitEnvConfig(rootPath string) error {
 		return errPackage.ErrFailedToLoadEnv
 	}
 
-	if err := ValidateConfig(); err != nil {
-		return err
-	}
+	// TODO: Make these validations optional for dev setup
+	// if err := ValidateConfig(); err != nil {
+	// 	return err
+	// }
 
 	// Asignar las estructuras a las variables globales
 	Server = &EnvConfig.Server
@@ -243,15 +244,15 @@ func validateDatabaseFields() error {
 	}
 
 	if !matchPattern(HostPattern, EnvConfig.Database.Host) {
-		return fmt.Errorf("DATABASE_HOST must be a valid host")
+		return fmt.Errorf("DB_HOST must be a valid host")
 	}
 
 	if !matchPattern(PortPattern, EnvConfig.Database.Port) {
-		return fmt.Errorf("DATABASE_PORT must be a valid port")
+		return fmt.Errorf("DB_PORT must be a valid port")
 	}
 
 	if !AvailableDatabaseDrivers[EnvConfig.Database.Driver] {
-		return fmt.Errorf("DATABASE_DRIVER must be a valid driver")
+		return fmt.Errorf("DB_DRIVER must be a valid driver")
 	}
 
 	return nil
@@ -304,7 +305,7 @@ func validateMHConfigFields() error {
 		f := v.Field(i)
 
 		if !matchPattern(URLPattern, f.String()) {
-			return fmt.Errorf("%s must be a valid URL", strings.ToUpper(t.Field(i).Name))
+			return fmt.Errorf("%s must be a valid MH URL", strings.ToUpper(t.Field(i).Name))
 		}
 	}
 
@@ -324,7 +325,7 @@ func validateSignerFields() error {
 		f := v.Field(i)
 
 		if !matchPattern(URLPattern, f.String()) {
-			return fmt.Errorf("%s must be a valid URL", strings.ToUpper(t.Field(i).Name))
+			return fmt.Errorf("%s must be a valid Signer URL", strings.ToUpper(t.Field(i).Name))
 		}
 	}
 

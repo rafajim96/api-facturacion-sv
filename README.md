@@ -63,13 +63,13 @@ cd dte-microservice
 
 3. Iniciar los servicios:
 ```bash
-docker-compose up -d
+docker-compose up
 ```
 
 ### Para desarrollo
 
 ```bash
-docker-compose --profile dev up -d
+docker-compose --profile dev up
 ```
 
 ### Configuración

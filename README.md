@@ -131,6 +131,11 @@ Este proyecto utiliza un pipeline de integración continua con dos ramas especí
 
 Cada rama se encarga de generar imágenes optimizadas para su respectiva arquitectura, asegurando compatibilidad en distintos entornos de ejecución.
 
+## Swagger
+
+- swag init
+- /swagger/index.html
+
 ## Ejecutar Tests
 
 - Instalar dependencias

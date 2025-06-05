@@ -1,6 +1,7 @@
 package health
 
 import (
+	"github.com/MarlonG1/api-facturacion-sv/config"
 	"github.com/MarlonG1/api-facturacion-sv/internal/domain/health"
 	"github.com/MarlonG1/api-facturacion-sv/internal/domain/health/constants"
 	"github.com/MarlonG1/api-facturacion-sv/internal/domain/health/models"
@@ -14,14 +15,15 @@ type healthService struct {
 }
 
 type HealthServiceConfig struct {
-	DB *gorm.DB
+	DB          *gorm.DB
+	RedisConfig *config.RedisConfig
 }
 
 func NewHealthService(cfg *HealthServiceConfig) health.HealthManager {
 	service := &healthService{
 		checkers: []health.ComponentChecker{
 			checkers.NewDatabaseChecker(cfg.DB),
-			checkers.NewRedisChecker(),
+			checkers.NewRedisChecker(cfg.RedisConfig),
 			checkers.NewHaciendaChecker(),
 			checkers.NewFileSystemChecker(),
 			checkers.NewSignerChecker(),

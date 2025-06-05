@@ -2,6 +2,8 @@ package checkers
 
 import (
 	"fmt"
+
+	"github.com/MarlonG1/api-facturacion-sv/config"
 	"github.com/MarlonG1/api-facturacion-sv/internal/domain/health"
 	"github.com/MarlonG1/api-facturacion-sv/internal/domain/health/constants"
 	"github.com/MarlonG1/api-facturacion-sv/internal/domain/health/models"
@@ -10,10 +12,11 @@ import (
 )
 
 type redisChecker struct {
+	redis *config.RedisConfig
 }
 
-func NewRedisChecker() health.ComponentChecker {
-	return &redisChecker{}
+func NewRedisChecker(redisConfig *config.RedisConfig) health.ComponentChecker {
+	return &redisChecker{redisConfig}
 }
 
 func (c *redisChecker) Name() string {
@@ -21,7 +24,8 @@ func (c *redisChecker) Name() string {
 }
 
 func (c *redisChecker) Check() models.Health {
-	checker := redis.NewChecker("tcp", ":6379")
+	addr := fmt.Sprintf("%s:%s", c.redis.Host, c.redis.Port)
+	checker := redis.NewChecker("tcp", addr)
 	health := checker.Check()
 	if health.IsDown() {
 		details := utils.TranslateHealthDown(c.Name())

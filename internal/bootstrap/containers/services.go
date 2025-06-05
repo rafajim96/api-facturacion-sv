@@ -88,7 +88,8 @@ func (c *ServicesContainer) Initialize() error {
 	c.testManager = adapterTest.NewTestService(c.repos.db)
 	c.metricsManager = adapterMetric.NewMetricService(c.cacheManager)
 	c.healthManager = adapterHealth.NewHealthService(&adapterHealth.HealthServiceConfig{
-		DB: c.repos.db,
+		DB:          c.repos.db,
+		RedisConfig: config.NewRedisConfig(),
 	})
 
 	transmissionConf := models.NewTransmissionConfig(5*time.Second, 2*time.Minute, 2.0)

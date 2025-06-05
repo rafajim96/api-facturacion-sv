@@ -11,6 +11,9 @@ import (
 	"github.com/MarlonG1/api-facturacion-sv/internal/infrastructure/api/routes"
 	"github.com/MarlonG1/api-facturacion-sv/pkg/shared/logs"
 	"github.com/gorilla/mux"
+	"github.com/swaggo/http-swagger"
+
+	_ "github.com/MarlonG1/api-facturacion-sv/docs"
 )
 
 type Server struct {
@@ -35,6 +38,8 @@ func Initialize(container *containers.Container) *Server {
 func (s *Server) ConfigureRoutes() {
 	s.configureGlobalMiddlewares()
 	s.configureGlobalOptions()
+
+	s.router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	// Configurar rutas públicas y protegidas
 	public := s.router.PathPrefix(s.publicPath).Subrouter()

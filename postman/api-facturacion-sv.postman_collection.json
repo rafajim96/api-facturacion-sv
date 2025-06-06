@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "f474fd2b-a5d7-4f99-8d73-961b491b6737",
+		"name": "api-facturacion-sv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43768454",
+		"_collection_link": "https://rafaeljimenez-237997.postman.co/workspace/Rafael-Jimenez's-Workspace~23e4744b-bde4-4a77-8bf9-c5c1bf8b4e25/collection/43768454-f474fd2b-a5d7-4f99-8d73-961b491b6737?action=share&source=collection_link&creator=43768454"
+	},
+	"item": [
+		{
+			"name": "Registrar Empresa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nit\": \"12345678911227\",\n  \"nrc\": \"1233260\",\n  \"auth_type\": \"STANDARD\",\n  \"phone\": \"21212828\",\n  \"email\": \"test_email@email.com\",\n  \"password_pri\": \"passwordtest\",\n  \"business_name\": \"EMPRESA DE PRUEBAS SA DE CV\",\n  \"commercial_name\": \"EMPRESA DE PRUEBAS\",\n  \"economic_activity\": \"62010\",\n  \"economic_activity_desc\": \"Programacion Informatica\",\n  \"year_in_dte\": true,\n  \"token_lifetime\": 30,\n  \"branch_offices\" : [\n    {\n      \"establishment_type\": \"02\",  // Casa matriz (obligatorio)\n      \"establishment_code\": \"C001\",\n      \"address\": {\n        \"department\": \"06\",\n        \"municipality\": \"20\",\n        \"complement\": \"BOULEVARD SANTA ELENA SUR, SANTA TECLA\"\n      }\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/auth/register",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"api_key\": \"3c9a84eb96de00370335f0ef5ac596325509f02a8e46bb267af5c39213ad340c\",\n  \"api_secret\": \"EyizfXxMeZXODo1Gp1rq-DE8XfSp-CbzDXm-2S0b6WHD9xsu-0PuYOPD9TNTF2Up\",\n  \"credentials\": {\n    \"username\": \"TU-HACIENDA-USERNAME\",\n    \"password\": \"TU-HACIENDA-PASSWORD-API\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/auth/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
